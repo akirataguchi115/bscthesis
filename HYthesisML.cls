@@ -499,7 +499,7 @@
 %}
 
 
-\renewcommand*{\thefootnote}{\fnsymbol{footnote}} %footnote symbols for one page only
+%\renewcommand*{\thefootnote}{\fnsymbol{footnote}} %footnote symbols for one page only
 \MakePerPage{footnote}
 
 %%%%%% Appendices %%%%%%%
