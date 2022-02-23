@@ -588,17 +588,17 @@
 \setcounter{page}{-998}
 \label{in}
 \thispagestyle{empty}
-% \if@censored 
-%  {
-%     \par
-%     {\bf\supervisorslabel}\par
-% %TM: parindent only indents the first line -> use \leftskip within {}
-% %    {\addtolength{\parindent}{2em} 
-%     {\leftskip=2em
-%      \@supervisors
-%   %  \addtolength{\parindent}{-2em}}
-%      \par
-%     }
+\if@censored
+ {
+    \par
+    {\bf\supervisorslabel}\par
+%TM: parindent only indents the first line -> use \leftskip within {}
+%    {\addtolength{\parindent}{2em}
+    {\leftskip=2em
+     \@supervisors
+  %  \addtolength{\parindent}{-2em}}
+     \par
+    }
     
 %     \par
 %     {\bf\examinerlabel}\par
@@ -606,8 +606,8 @@
 %      \@examiners
 %      \par
 %     }
-% }
-% \fi
+}
+\fi
 
 \vspace{4.0cm}
     \par
