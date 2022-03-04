@@ -1,2 +1,14 @@
 \chapter{Puolustusmetodit\label{discussion}}
-NLP-hyökkäykset voidaan estää alhaisemmalla tasolla overheadilla sekä korkeammalla tasolla edistyneen teknologian turvin.
+\section{OCR-puolustus}
+NLP-hyökkäykset voidaan estää alhaisemmalla tasolla overheadilla sekä korkeammalla tasolla edistyneen teknologian turvin. Näytöltäluvun (eng. OCR, On-Screen-Reading) avulla epäselvyydet tekstin aidosta luonteesta voidaan uudelleenrenderöidä tulkitsemalla aineisto uudestaan visuaalisesti. Tämä metodi lisää overheadia huomattavasti riippuen käyttötarkoituksesta, mutta poistaa pahantahtoiset merkit ilman NLP-mallin uudelleenkoulutusta.
+
+\section{Suorituskykykeskeinen puolustus}
+Keskitymme seuraavaksi näkymättömiin merkkeihin, -homoglyyfeihin, \-uudelleenjärjestelyihin -ja poistatuksiin perustuvien hyökkyksien puolustamiseen.
+
+Tietyt näkymättömät merkit voidaan poistaa suoraa syötteestä. Mikäli applikaatiossa näitä merkkejä ei voida poistaa, voidaan ne korvata non-<unk> upotuksilla.
+
+Homoglyyfihyökkäysten torjuminen OCR-metodilla on ymmärrettävästi vaikeampaa verrattuina muihin merkkeihin. Paras keino torjua tällaisia hyökkäyksiä olisi mapata osa homoglyyfeistä niiden yleisemmin tunnettuihin vastineisiin. NLP-mallin ylläpitäjä joutuu tekemään tässä siis suurimman jalkatyön.
+
+Uudelleenjärjestelyhyökkäykset voidaan torjua riisumalla bidi-ohjausmerkit syötteestä, varoittamalla käyttäjää bidi-ohjausmerkkien ilmestyessä syötteeseen tai käyttämällä bidi-algoritmia halutun syötteen selvittämiseen.
+
+Poistatukset yleensä havaitaan NLP-mallien ulkopuolella syötteen annon ensivaihessa. NLP-mallin tasolla tähän tarvitsee harvemmin puuttua ja käyttäjälle voidaan pahimmassa tapauksessa lähettää varoitus poistatusmerkkien olemassaolosta syötteessä.
