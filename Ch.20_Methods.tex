@@ -6,7 +6,8 @@ Näkymättömät merkit vaikuttavat tietokoneen NLP-mallin ymmärtämään konte
 
 Kontekstin poistamisen lisäksi näkymättömillä merkeillä voidaan myös tuoda ja syrjäyttää konteksteja toisilla.\\
 \texttt{Mikä pyhäinhäväistyksen rakennus!\\
-Miten onnistuit tekemään tämän näin laiskasti?} -tekstin negatiivisuus voidaan syrjäyttää positiivisuudella syöttämällä NLP-mallille sen sijaan teksti \\
+Miten onnistuit tekemään tämän näin laiskasti?} -tekstin negatiivisuus voidaan\\
+syrjäyttää positiivisuudella syöttämällä NLP-mallille sen sijaan teksti \\
 \texttt{Mikä py\textcolor{red}{U+200B}häinhäv\textcolor{red}{U+200B}äisty\textcolor{red}{U+200B}ksen\textcolor{red}{U+200B} rakennus!\\
 Miten onnistuit tekemään tämän \textcolor{red}{U+200B}nä\textcolor{red}{U+200B}in la\textcolor{red}{U+200B}iskas\textcolor{red}{U+200B}ti?}.
 
@@ -14,7 +15,7 @@ Miten onnistuit tekemään tämän \textcolor{red}{U+200B}nä\textcolor{red}{U+2
 Homoglyyfihyökkäykset NLP-malleja vastaan pohjautuvat pahantahtoisten merkkien virallisten esitysmuotojen näyttävän hyväntahtoisten merkkien virallisilta esityksiltä. Joissain kielissä tekstin merkitys muuttuu täysin yhden merkin vaihtuessa. Esimerkkinä homoglyyfistä on \texttt{A $\rightarrow$ A}, missä viimeinen kirjain on todellisuudessa kyrillinen kirjain A. Näkymättömien merkkien lailla homoglyyfihyökkäyksen toteutus riippuu ympäristön fontista.
 
 \section{Uudelleenjärjestelyt}
-Uudelleenjärjestelyhyökkäys pohjautuu näennäisen tekstin uudelleenjärjestämiseen pahantahtoisesti. Pankkitilinumeron \texttt{1234567} pystyy esimerkiksi vaihtamaan kaksisuuntaisella-algoritmilla tilinumeroksi \texttt{7654321} maksajan huomaamatta mitään.
+Uudelleenjärjestelyhyökkäys pohjautuu näennäisen tekstin uudelleenjärjestämiseen pahantahtoisesti. Pankkitilinumeron \texttt{1234567} pystyy esimerkiksi vaihtamaan kaksisuuntaisella-algoritmilla tilinumeroksi \texttt{7654321} maksajan huomaamatta mitään. Unicode-merkintä tälle suunnanvaihdolle on \texttt{U+200F}, ja tämä ladonta tulostetaan näkymättömänä näkymättömien merkkien tapaan.
 
 \section{Poistatukset}
 Poistatushyökkäyksiä on vaikeampi toteuttaa aikaisempiin metodeihin verrattuna. Tämä johtuu useimpien käyttöjärjestelmien estosta kopioida poistatusta sisältävää tekstiä leikepöydälle.
