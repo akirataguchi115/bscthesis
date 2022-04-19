@@ -1,21 +1,55 @@
 \chapter{Hyökkäystaksonomia\label{methods}}
-Käymme seuraavaksi läpi neljä erilaista huomaamatonta hyökkäysmetodia. Nämä hyökkäykset eivät siis näy visuaalisesti ihmiskäyttäjälle näyttöpäätteellä erilaisina verrattuna viattomaan tekstiin. Tarkemmin keskitymme Unicoden ja muiden enkoodausmenetelmien hyväksikäyttämiseen NLP-malleja vastaan.
+Käydään läpi hyökkästaksonomia, eli hyökkäysrajapinta, NLP-malleja vastaan.
+
+\section{Roskapostisuodatuksen ohitus}
+Vastakkaishyökkäyksiä voidaan käyttää sähköposteissa roskapostisuodattimien ohitukseen. Roskapostisuodattimet toimivat koulutettujen NLP-mallien mukaan. Nämä mallit siis merkkaavat vastaanotetut sähköpostit joko hyväntahtoisiksi tai pahantahtoisiksi, eli roskaposteiksi. \citep{spamfilter}
+
+Suodattimia vastaan toimii kolme vastakkaishyökkäystä. Synonyymin korvaus, kelposanan injektointi sekä roskapostisanojen väljennys. Sana ''kelpo'' tarkoittaa tässä yhteydessä tekstiä, jonka roskapostisuodatin on merkinnyt hyväntahtoiseksi. Synonyymin korvauksessa tarkoitus on korvata pahantahtoiset sanat hyväntahtoisiksi luokitelluilla synonyymeillä (taulukko 2.1).
+
+\begin{table}[t]
+  \begin{tabular}{| m{22em} | m{5em} | c |}
+    \hline
+    Muokattu viesti & Kosini-saman\-kaltaisuus & Ennustus \\
+    \hline
+    Ringtone Club: Get the UK singles chart on your mobile each week and choose any top quality ringtone! This message is free of charge. & 1 & roskapostia \\
+    \hline
+    Ringtone Club: \textbf{acquire} the UK single \textbf{graph} on your \textbf{Mobile\_River} each \textbf{hebdomad} and \textbf{take} any \textbf{top\_side} \textbf{caliber} ringtone! This \textbf{content} is \textbf{free\_people} of charge. & $0,583$ & roskapostia \\
+    \hline
+    Ringtone Club: \textbf{become} the UK \textbf{bingle} \textbf{graph} on your \textbf{nomadic} each \textbf{workweek} and \textbf{select} any \textbf{upper\_side} \textbf{caliber} ringtone! This \textbf{subject\_matter} is \textbf{liberate} of charge. & $0,583$ & roskapostia \\
+    \hline
+    Ringtone Club: \textbf{go} the UK \textbf{one} \textbf{graph} on your \textbf{peregrine} each \textbf{calendar\_week} and \textbf{pick\_out} any \textbf{upside} \textbf{character} ringtone! This \textbf{substance} is \textbf{release} of charge. & $0,583$ & kelpopostia \\
+    \hline
+  \end{tabular}
+  \caption{Synonyymin korvaus. Vanhan viestin korvatut osat on lihavoitu. \citep{spamfilter}}
+\end{table}
 
 \section{Näkymättömät merkit}
 Näkymättömät merkit vaikuttavat tietokoneen NLP-mallin ymmärtämään kontekstiin. Esimerkki tällaisesta on nollatilavuuden välilyönti -merkki, jonka Unicode merkintä on \texttt{U+200B}. Tällä merkillä voimme esimerkiksi vaikuttaa pelichattiin lähetettävän toksissuodatettavan merkkijonoon "olet huono" niin, että merkkijono menisi NLP-mallin läpi chätistä. Merkkijono \texttt{olU+200Bet huU+200Bono} saattaisi mennä läpi chatin suodattimesta, mutta vastapuolelle viesti olisi edelleen \texttt{olet huono}.
 
 Kontekstin poistamisen lisäksi näkymättömillä merkeillä voidaan myös tuoda ja syrjäyttää konteksteja toisilla.\\
 \texttt{Mikä pyhäinhäväistyksen rakennus!\\
-Miten onnistuit tekemään tämän näin laiskasti?} -tekstin negatiivisuus voidaan\\
+  Miten onnistuit tekemään tämän näin laiskasti?} -tekstin negatiivisuus voidaan\\
 syrjäyttää positiivisuudella syöttämällä NLP-mallille sen sijaan teksti \\
 \texttt{Mikä py\textcolor{red}{U+200B}häinhäv\textcolor{red}{U+200B}äisty\textcolor{red}{U+200B}ksen\textcolor{red}{U+200B} rakennus!\\
-Miten onnistuit tekemään tämän \textcolor{red}{U+200B}nä\textcolor{red}{U+200B}in la\textcolor{red}{U+200B}iskas\textcolor{red}{U+200B}ti?}.
+  Miten onnistuit tekemään tämän \textcolor{red}{U+200B}nä\textcolor{red}{U+200B}in la\textcolor{red}{U+200B}iskas\textcolor{red}{U+200B}ti?}.
 
 \section{Homoglyfit}
-Homoglyyfihyökkäykset NLP-malleja vastaan pohjautuvat pahantahtoisten merkkien virallisten esitysmuotojen näyttävän hyväntahtoisten merkkien virallisilta esityksiltä. Joissain kielissä tekstin merkitys muuttuu täysin yhden merkin vaihtuessa. Esimerkkinä homoglyyfistä on \texttt{A $\rightarrow$ A}, missä viimeinen kirjain on todellisuudessa kyrillinen kirjain A. Näkymättömien merkkien lailla homoglyyfihyökkäyksen toteutus riippuu ympäristön fontista.
+Homoglyyfihyökkäykset NLP-malleja vastaan pohjautuvat pahantahtoisten merkkien virallisten esitysmuotojen näyttävän hyväntahtoisten merkkien virallisilta esityksiltä.Jois\-sain kielissä tekstin merkitys muuttuu täysin yhden merkin vaihtuessa. Esimerkkinä homoglyyfistä on \texttt{A $\rightarrow$ A}, missä viimeinen kirjain on todellisuudessa kyrillinen kirjain A. Kuvassa 2.1 homoglyyfihyökkäys on muuntanut englanninkielisen tekstin\\ \texttt{I just can't belive where she was} ranskankieliseen käännökseen\\ \texttt{I guess I can't underestimate the location of the scribe and}.
+\begin{figure}[t]
+  \includegraphics[scale=0.5]{figures/homoglyph.png}
+  \caption{Homoglyyfihyökkäys \citep{boucher2021bad}}
+\end{figure}
+\\Näkymättömien merkkien lailla homoglyyfihyökkäyksen toteutus riippuu ympäristön fontista.
+
 
 \section{Uudelleenjärjestelyt}
-Uudelleenjärjestelyhyökkäys pohjautuu näennäisen tekstin uudelleenjärjestämiseen pahantahtoisesti. Pankkitilinumeron \texttt{1234567} pystyy esimerkiksi vaihtamaan kaksisuuntaisella-algoritmilla tilinumeroksi \texttt{7654321} maksajan huomaamatta mitään. Unicode-merkintä tälle suunnanvaihdolle on \texttt{U+200F}, ja tämä ladonta tulostetaan näkymättömänä näkymättömien merkkien tapaan.
+Uudelleenjärjestelyhyökkäys pohjautuu näennäisen tekstin uudelleenjärjestämiseen pahantahtoisesti. Pankkitilinumeron \texttt{1234567} pystyy esimerkiksi vaihtamaan kaksisuuntaisella-algoritmilla tilinumeroksi \texttt{7654321} pankin palvelinpuolella. maksajan huomaamatta mitään. Unicode-merkintä tälle suunnanvaihdolle on \texttt{U+200F}. Uudelleenjärjestelyjä käytetään myös NLP-mallin sekoittamiseen, jolloin tulokset NLP-mallista ovat käyttökelvottomia. Kuvassa 2.2 uudelleenjärjestelyhyökkäys merkeissä \texttt{la} aiheuttaa ranskankielisen käännöksen järjettömyyden. Tämänlaista hyökkäystä voisi käyttää digitaalista sanakirjaa tai kääntäjää vastaan.
+\begin{figure}[t]
+  \includegraphics[scale=0.5]{figures/reordering.png}
+  \caption{Homoglyyfihyökkäys \citep{boucher2021bad}}
+\end{figure}
+\texttt{U+200F} ladotaan näkymättömänä näkymättömien merkkien tapaan.
+
 
 \section{Poistatukset}
 Poistatushyökkäyksiä on vaikeampi toteuttaa aikaisempiin metodeihin verrattuna. Tämä johtuu useimpien käyttöjärjestelmien estosta kopioida poistatusta sisältävää tekstiä leikepöydälle.
