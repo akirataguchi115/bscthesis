@@ -30,6 +30,13 @@ Kelposanan injektoinnille ja roskasanojen väljennykselle on olemassa erilaisia 
   \caption{Synonyymin korvaus. Vanhan viestin korvatut osat on lihavoitu. \citep{spamfilter}}
 \end{table}
 
+\section{Neuroverkkohyökkäykset}
+Sanatason vastakkaishyökkäykset syvää oppimisverkkoa vastaan paljastavat  näiden verkkojen heikkouksia. Vastakkaishyökkääminen näitä verkkoja vastaan on vaikeaa verrattuna kuvatason hyökkäyksiin. Tämä johtuu lauseiden diskreetistä luonteesta. Pienikin sana -tai merkkimuutos vaikuttaa lauseen viestiin sekä todennäköisemmin viestin luokitukseen, jonka NLP-malli päättää. \citep{neural}
+
+\section{Sensuurin ohitus}
+Kuvien sensuroimista internetissä voidaan soveltaa  käyttäen syvää oppimisverkkoa, kuten Martin D. More, Douglas M. Souza, Jônatas Wehrmann, Rodrigo C Barros osoittavat julkaisuussaan \textit{Seamless Nudity Censorship: an Image-to-Image Translation Approach based on Adversarial Training}. Syvää oppimisverkkoa hyödynnetään tunnistamaan intiimialueet ja tämän jälkeen vaatetuttamaan kuvien henkilöiden intiimialueet. \citep{censorship}
+
+Koska sensuuria voidaan soveltaa hyödyntäen koneoppimismalleja, voidaan sensuuri myös ohittaa hyödyntäen koneoppimismallin heikkouksia. Vastakkaishyökkäys voisi tunnistaa sensurointia aiheuttavia pikseliyhdistelmiä, ja tässä tutkimuksessa esiteltyjä hyökkäystapoja käyttäen sensuurin laukaiseminen voidaan estää. Tällöin kyseessä ei kuitenkaan enää ole puhdas merkintä (eng. clean label), sillä vastakkaishyökkäyksen todellinen tarkoitus näkyy käyttäjälle silmintarkasteltavana \citep{triggerless}. Puhtaan merkinnän uupuessa esimerkiksi tekstipohjaisesti vastakkaishyökkäyksestä myös helppo puolustaminen on mahdollista \citep{pruthi2019}.
 
 \section{Näkymättömät merkit}
 Näkymättömät merkit vaikuttavat tietokoneen NLP-mallin ymmärtämään kontekstiin. Esimerkki tällaisesta on nollatilavuuden välilyönti -merkki, jonka Unicode merkintä on \texttt{U+200B}. Tällä merkillä voimme esimerkiksi vaikuttaa pelichattiin lähetettävän toksissuodatettavan merkkijonoon "olet huono" niin, että merkkijono menisi NLP-mallin läpi chätistä. Merkkijono \texttt{ol\textcolor{red}{U+200B}et hu\textcolor{red}{U+200B}ono} saattaisi mennä läpi chatin suodattimesta, mutta vastapuolelle viesti olisi edelleen \texttt{olet huono}. \citep{boucher2021bad}
@@ -45,7 +52,7 @@ Poistatushyökkäykset kuuluvat näkymättömien merkkein kategoriaan, mutta onn
 
 \section{Homoglyfit}
 Homoglyyfihyökkäykset NLP-malleja vastaan pohjautuvat pahantahtoisten merkkien virallisten esitysmuotojen näyttävän hyväntahtoisten merkkien virallisilta esityksiltä.Jois\-sain kielissä tekstin merkitys muuttuu täysin yhden merkin vaihtuessa. Esimerkkinä homoglyyfistä on \texttt{A $\rightarrow$ A}, missä viimeinen kirjain on todellisuudessa kyrillinen kirjain A. Kuvassa 2.1 homoglyyfihyökkäys on muuntanut englanninkielisen tekstin\\ \texttt{I just can't belive where she was} ranskankieliseen käännökseen\\ \texttt{I guess I can't underestimate the location of the scribe and}.
-\begin{figure}[t]
+\begin{figure}[hbt]
   \includegraphics[scale=0.5]{figures/homoglyph.png}
   \caption{Homoglyyfihyökkäys \citep{boucher2021bad}}
 \end{figure}
