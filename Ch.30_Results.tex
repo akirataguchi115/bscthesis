@@ -1,18 +1,19 @@
-\chapter{Puolustusmetodit\label{results}}
+\chapter{Puolustusmenetelmät\label{results}}
+Käydään läpi puolustusmenetelmät NLP-hyökkäyksiä vastaan.
 
 \section{OCR-puolustus}
-NLP-hyökkäykset voidaan estää alhaisemmalla tasolla korkealla yleisrasituksella sekä korkeammalla tasolla edistyneen teknologian turvin \citep{boucher2021bad}. Näytöltäluvun (eng. OCR, On-Screen-Reading) avulla epäselvyydet tekstin aidosta luonteesta voidaan uudelleenrenderöidä tulkitsemalla aineisto uudestaan visuaalisesti. Tämä metodi lisää yleisrasitusta huomattavasti riippuen käyttötarkoituksesta, mutta poistaa pahantahtoiset merkit ilman NLP-mallin uudelleenkoulutusta.
+NLP-hyökkäykset voidaan torjua korkean tason abstraktiolla korkealla yleisrasituksella sekä alemman tason abstraktiolla alemmalla yleisrasituksella. Näytöltäluvun (eng. OCR, On-Screen-Reading) avulla epäselvyydet tekstin aidosta luonteesta voidaan hahmontaa uudelleen tulkitsemalla aineisto uudestaan visuaalisesti. Tämä menetelmä lisää yleisrasitusta huomattavasti riippuen käyttötarkoituksesta, mutta poistaa pahantahtoiset merkit ilman NLP-mallin uudelleenkoulutusta. \citep{boucher2021bad}
 
 \section{Suorituskykykeskeinen puolustus}
-Keskitymme seuraavaksi näkymättömiin merkkeihin, -homoglyyfeihin, \-uudelleenjärjestelyihin -ja poistatuksiin perustuvien hyökkyksien puolustamiseen. Suorituskykykeskeiset puolustusmetodit ovat kuitenkin laskennallisesti kalliita, eivätkä koneoppimismallin ulkoistaneet firmat pysty kustantamaan kyseisiä metodeita \citep{https://doi.org/10.48550/arxiv.1911.07399}.
+Keskitymme seuraavaksi näkymättömiin merkkeihin, -homoglyfeihin, \-uudelleenjärjestelyihin -ja poistatuksiin perustuvien hyökkyksien puolustamiseen. Suorituskykykeskeiset puolustusmenetelmät ovat kuitenkin laskennallisesti kalliita, eivätkä koneoppimismallin ulkoistaneet yritykset pysty kustantamaan kyseisiä metodeita \citep{https://doi.org/10.48550/arxiv.1911.07399}.
 
-Tietyt näkymättömät merkit voidaan poistaa suoraa syötteestä. Mikäli applikaatiossa näitä merkkejä ei voida poistaa, voidaan ne korvata non-<unk> upotuksilla.
+Tietyt näkymättömät merkit voidaan poistaa suoraan syötteestä. Mikäli sovelluksessa näitä merkkejä ei voida poistaa, voidaan ne korvata \textit{ei-}\texttt{<unk>} upotuksilla. Korvaus tapahtuu lähdekielisanakirjassa, jonne kuvataan tuntematon merkki ''ei-tuntemattomaksi tokeniksi''. Näin tuntemattomat merkit eivät voi häiritä ladontaa merkeillä, joista ladontamoottori ei ole aivan varma. \citep{boucher2021bad}
 
-Homoglyyfihyökkäysten torjuminen OCR-metodilla on ymmärrettävästi vaikeampaa verrattuina muihin merkkeihin. Paras keino torjua tällaisia hyökkäyksiä olisi mapata osa homoglyyfeistä niiden yleisemmin tunnettuihin vastineisiin. NLP-mallin ylläpitäjä joutuu tekemään tässä siis suurimman jalkatyön.
+Homoglyfihyökkäysten torjuminen OCR-menetelmällä on ymmärrettävästi vaikeampaa verrattuina muihin merkkeihin. Paras keino torjua tällaisia hyökkäyksiä olisi kuvata osa homoglyfeistä niiden yleisemmin tunnettuihin vastineisiin. NLP-mallin ylläpitäjä joutuu tekemään tässä siis suurimman työn. \citep{boucher2021bad}
 
-Uudelleenjärjestelyhyökkäykset voidaan torjua riisumalla kaksisuuntais-ohjausmerkit\\syötteestä, varoittamalla käyttäjää kaksisuuntais-ohjausmerkkien ilmestyessä syötteeseen tai käyttämällä kaksisuuntais-algoritmia halutun syötteen selvittämiseen. Puolustusmetodin valinta riippuu kontekstista, sillä esimerkiksi latinaa tai arabiaa kirjoittaessa ohjelma toimisi väärin pakottamalla käyttäjän syötteestä pois kaksisuuntais-ohjausmerkin \texttt{U+200F}.
+Uudelleenjärjestelyhyökkäykset voidaan torjua riisumalla kaksisuuntais-ohjausmerkit\\syötteestä, varoittamalla käyttäjää kaksisuuntais-ohjausmerkkien ilmestyessä syötteeseen tai käyttämällä kaksisuuntais-algoritmia halutun syötteen selvittämiseen. Puolustusmenetelmän valinta riippuu kontekstista, sillä esimerkiksi latinaa tai arabiaa kirjoittaessa ohjelma toimisi väärin pakottamalla käyttäjän syötteestä pois kaksisuuntais-ohjausmerkin \texttt{U+200F}. \citep{boucher2021bad}
 
-Poistatukset yleensä havaitaan NLP-mallien ulkopuolella syötteen annon alkuvaiheessa. NLP-mallin tasolla tähän tarvitsee harvemmin puuttua ja käyttäjälle voidaan pahimmassa tapauksessa lähettää varoitus poistatusmerkkien olemassaolosta syötteessä. On silti tärkeää tiedostaa poistatuksien puolustus, mikäli käyttöjärjestelmä unohtaa puuttua kyseiseen hyökkäysrajapintaan.
+Poistatukset yleensä havaitaan NLP-mallien ulkopuolella syötteen annon alkuvaiheessa. NLP-mallin tasolla tähän tarvitsee harvemmin puuttua ja käyttäjälle voidaan pahimmassa tapauksessa lähettää varoitus poistatusmerkkien olemassaolosta syötteessä. On silti tärkeää tiedostaa poistatuksien puolustus, mikäli käyttöjärjestelmä unohtaa puuttua kyseiseen hyökkäysrajapintaan. \citep{boucher2021bad}
 
 \section{Lujitus käyttäen lineaarisia luokittimia}
 NLP-malleja voidaan lujittaa käyttämällä tukivektorikonetta, mikä perustuu lineaarisiin luokittimiin. Xupeng Shi ja A. Adam Ding käsittelevät tukivektorikoneen lujitusmahdollisuuksia tuktimuksessaan \textit{Understanding and Quantifying Adversarial Examples Existence in Linear Classification}. Tutkielma pohjautuu kahteen olennaiseen määritelmään:

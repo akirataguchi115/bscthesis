@@ -39,7 +39,9 @@ Kuvien sensuroimista internetissä voidaan soveltaa  käyttäen syvää oppimisv
 Koska sensuuria voidaan soveltaa hyödyntäen koneoppimismalleja, voidaan sensuuri myös ohittaa hyödyntäen koneoppimismallin heikkouksia. Vastakkaishyökkäys voisi tunnistaa sensurointia aiheuttavia pikseliyhdistelmiä, ja tässä tutkimuksessa esiteltyjä hyökkäystapoja käyttäen sensuurin laukaiseminen voidaan estää. Tällöin kyseessä ei kuitenkaan enää ole puhdas merkintä (eng. clean label), sillä vastakkaishyökkäyksen todellinen tarkoitus näkyy käyttäjälle silmintarkasteltavana \citep{triggerless}. Puhtaan merkinnän uupuessa esimerkiksi tekstipohjaisesti vastakkaishyökkäyksestä myös helppo puolustaminen on mahdollista \citep{pruthi2019}.
 
 \section{Näkymättömät merkit}
-Näkymättömät merkit vaikuttavat tietokoneen NLP-mallin ymmärtämään kontekstiin. Esimerkki tällaisesta on nollatilavuuden välilyönti -merkki, jonka Unicode merkintä on \texttt{U+200B}. Tällä merkillä voimme esimerkiksi vaikuttaa pelichattiin lähetettävän toksissuodatettavan merkkijonoon "olet huono" niin, että merkkijono menisi NLP-mallin läpi chätistä. Merkkijono \texttt{ol\textcolor{red}{U+200B}et hu\textcolor{red}{U+200B}ono} saattaisi mennä läpi chatin suodattimesta, mutta vastapuolelle viesti olisi edelleen \texttt{olet huono}. \citep{boucher2021bad}
+Näkymättömät merkit vaikuttavat tietokoneen NLP-mallin ymmärtämään sisältöön. Kyseinen hyökkäys perustuu Unicode-merkistöstandardiin, joka sisältää yksilöivät koodiarvot kirjoitushetkellä yli 100 000 kirjoitusmerkille. Kuuluvat aakkoset sekä erikoismerkit.
+
+Esimerkki tällaisesta erikoismerkistä on nollatilavuuden välilyönti -merkki, jonka Unicode merkintä on \texttt{U+200B}. Tällä merkillä voimme esimerkiksi vaikuttaa pelichattiin lähetettävän myrkyllissuodatettavaan merkkijonoon "olet huono" niin, että merkkijono menisi NLP-mallin läpi chätistä. Merkkijono \texttt{ol\textcolor{red}{U+200B}et hu\textcolor{red}{U+200B}ono} saattaisi mennä läpi chatin suodattimesta, mutta vastapuolelle viesti olisi edelleen \texttt{olet huono}. \citep{boucher2021bad}
 
 Kontekstin poistamisen lisäksi näkymättömillä merkeillä voidaan myös tuoda ja syrjäyttää konteksteja toisilla.\\
 \texttt{Mikä pyhäinhäväistyksen rakennus!\\
@@ -51,18 +53,18 @@ syrjäyttää positiivisuudella syöttämällä NLP-mallille sen sijaan teksti \
 Poistatushyökkäykset kuuluvat näkymättömien merkkein kategoriaan, mutta onnistumistodennäköisyys poistatushyökkäyksille on alhainen.Poistatushyökkäyksiä on vaikeampi toteuttaa aikaisempiin metodeihin verrattuna. Tämä johtuu useimpien käyttöjärjestelmien estosta kopioida poistatusta sisältävää tekstiä leikepöydälle. \citep{boucher2021bad}
 
 \section{Homoglyfit}
-Homoglyyfihyökkäykset NLP-malleja vastaan pohjautuvat pahantahtoisten merkkien virallisten esitysmuotojen näyttävän hyväntahtoisten merkkien virallisilta esityksiltä.Jois\-sain kielissä tekstin merkitys muuttuu täysin yhden merkin vaihtuessa. Esimerkkinä homoglyyfistä on \texttt{A $\rightarrow$ A}, missä viimeinen kirjain on todellisuudessa kyrillinen kirjain A. Kuvassa 2.1 homoglyyfihyökkäys on muuntanut englanninkielisen tekstin\\ \texttt{I just can't belive where she was} ranskankieliseen käännökseen\\ \texttt{I guess I can't underestimate the location of the scribe and}.
+Homoglyfihyökkäykset NLP-malleja vastaan pohjautuvat pahantahtoisten merkkien virallisten esitysmuotojen näyttävän hyväntahtoisten merkkien virallisilta esityksiltä.Jois\-sain kielissä tekstin merkitys muuttuu täysin yhden merkin vaihtuessa. Esimerkkinä homoglyfistä on \texttt{A $\rightarrow$ A}, missä viimeinen kirjain on todellisuudessa kyrillinen kirjain A. Kuvassa 2.1 homoglyfihyökkäys on muuntanut englanninkielisen tekstin\\ \texttt{I just can't belive where she was} ranskankieliseen käännökseen\\ \texttt{I guess I can't underestimate the location of the scribe and}.
 \begin{figure}[hbt]
   \includegraphics[scale=0.5]{figures/homoglyph.png}
-  \caption{Homoglyyfihyökkäys \citep{boucher2021bad}}
+  \caption{Homoglyfihyökkäys \citep{boucher2021bad}}
 \end{figure}
-\\Näkymättömien merkkien lailla homoglyyfihyökkäyksen toteutus riippuu ympäristön fontista. \citep{boucher2021bad}
+\\Näkymättömien merkkien lailla homoglyfihyökkäyksen toteutus riippuu ympäristön fontista. \citep{boucher2021bad}
 
 
 \section{Uudelleenjärjestelyt}
 Uudelleenjärjestelyhyökkäys pohjautuu näennäisen tekstin uudelleenjärjestämiseen pahantahtoisesti. Pankkitilinumeron \texttt{1234567} pystyy esimerkiksi vaihtamaan kaksisuuntaisella-algoritmilla tilinumeroksi \texttt{7654321} pankin palvelinpuolella. maksajan huomaamatta mitään. Unicode-merkintä tälle suunnanvaihdolle on \texttt{U+200F}. Uudelleenjärjestelyjä käytetään myös NLP-mallin sekoittamiseen, jolloin tulokset NLP-mallista ovat käyttökelvottomia. Kuvassa 2.2 uudelleenjärjestelyhyökkäys merkeissä \texttt{la} aiheuttaa ranskankielisen käännöksen järjettömyyden. Tämänlaista hyökkäystä voisi käyttää digitaalista sanakirjaa tai kääntäjää vastaan. \citep{boucher2021bad}
 \begin{figure}[t]
   \includegraphics[scale=0.5]{figures/reordering.png}
-  \caption{Homoglyyfihyökkäys \citep{boucher2021bad}}
+  \caption{Homoglyfihyökkäys \citep{boucher2021bad}}
 \end{figure}
 \texttt{U+200F} ladotaan näkymättömänä näkymättömien merkkien tapaan.
