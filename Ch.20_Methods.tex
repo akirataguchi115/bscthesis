@@ -2,7 +2,7 @@
 Käydään läpi hyökkästaksonomia, eli hyökkäysrajapinta, NLP-malleja vastaan.
 
 \section{Roskapostisuodatuksen ohitus}
-Vastakkaishyökkäyksiä voidaan käyttää sähköposteissa roskapostisuodattimien ohitukseen. Roskapostisuodattimet toimivat koulutettujen NLP-mallien mukaan. Nämä mallit siis merkkaavat vastaanotetut sähköpostit joko hyväntahtoisiksi tai pahantahtoisiksi, eli roskaposteiksi. \citep{spamfilter}
+Vastakkaishyökkäyksiä voidaan käyttää sähköposteissa roskapostisuodattimien ohitukseen. Roskapostisuodattimet toimivat koulutettujen NLP-mallien mukaan. Nämä mallit merkkaavat vastaanotetut sähköpostit joko hyväntahtoisiksi tai pahantahtoisiksi, eli roskaposteiksi. \citep{spamfilter}
 
 Suodattimia vastaan toimii kolme vastakkaishyökkäystä. Synonyymin korvaus, kelposanan injektointi sekä roskapostisanojen väljennys. Sana ''kelpo'' tarkoittaa tässä yhteydessä tekstiä, jonka roskapostisuodatin on merkinnyt hyväntahtoiseksi. Synonyymin korvauksessa tarkoitus on korvata pahantahtoiset sanat hyväntahtoisiksi luokitelluilla synonyymeillä (taulukko 2.1). Sanojen synonyymisyys lasketaan taulukon 2.1 tapauksessa kuvan 2.1 kosini-samankaltaisuudella. Kelposanan injektoinnissa kelposanoja lisätään sähköpostiin niin paljon, kunnes NLP-malli tunnistaa roskapostin olevan kelpopostia. Kelposanoja voidaan injektoida tietokannoista roskaposteihin muuttamatta viestin tarkoitusta rajusti. Roskapostisanojen väljennyksessä roskapostisanoihin sisällytetään välilyöntejä, jotta NLP-malli ei tunnistaisi näitä sanoja roskasanoiksi. Kun väljennystä on harjoitettu tarpeeksi, muuttuu roskaposti NLP-mallin näkökulmasta kelpopostiksi. \citep{spamfilter}
 
@@ -53,7 +53,7 @@ syrjäyttää positiivisuudella syöttämällä NLP-mallille sen sijaan teksti \
 Poistatushyökkäykset kuuluvat näkymättömien merkkein kategoriaan, mutta onnistumistodennäköisyys poistatushyökkäyksille on alhainen.Poistatushyökkäyksiä on vaikeampi toteuttaa aikaisempiin metodeihin verrattuna. Tämä johtuu useimpien käyttöjärjestelmien estosta kopioida poistatusta sisältävää tekstiä leikepöydälle. \citep{boucher2021bad}
 
 \section{Homoglyfit}
-Homoglyfihyökkäykset NLP-malleja vastaan pohjautuvat pahantahtoisten merkkien virallisten esitysmuotojen näyttävän hyväntahtoisten merkkien virallisilta esityksiltä.Jois\-sain kielissä tekstin merkitys muuttuu täysin yhden merkin vaihtuessa. Esimerkkinä homoglyfistä on \texttt{A $\rightarrow$ A}, missä viimeinen kirjain on todellisuudessa kyrillinen kirjain A. Kuvassa 2.1 homoglyfihyökkäys on muuntanut englanninkielisen tekstin\\ \texttt{I just can't belive where she was} ranskankieliseen käännökseen\\ \texttt{I guess I can't underestimate the location of the scribe and}.
+Homoglyfihyökkäykset NLP-malleja vastaan pohjautuvat pahantahtoisten merkkien virallisten esitysmuotojen näyttävän hyväntahtoisten merkkien virallisilta esityksiltä. Jois\-sain kielissä tekstin merkitys muuttuu täysin yhden merkin vaihtuessa. Esimerkkinä homoglyfistä on \texttt{A $\rightarrow$ A}, missä viimeinen kirjain on todellisuudessa kyrillinen kirjain A. Kuvassa 2.1 homoglyfihyökkäys on muuntanut englanninkielisen tekstin\\ \texttt{I just can't belive where she was} ranskankieliseen käännökseen\\ \texttt{I guess I can't underestimate the location of the scribe and}.
 \begin{figure}[hbt]
   \includegraphics[scale=0.5]{figures/homoglyph.png}
   \caption{Homoglyfihyökkäys \citep{boucher2021bad}}
