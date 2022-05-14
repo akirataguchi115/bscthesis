@@ -1,19 +1,30 @@
-\chapter{Skaalautuvuus\label{discussion}}
-Neljän aikaisemmin mainitun NLP-mallin mahdollistajien kehittyessä arvaamattomasti, on loogista tutkia NLP-hyökkäysten tulevaisuutta. 
+\chapter{Hyökkäyksiltä suojautuminen\label{discussion}}
 
-NLP-mallien haavoittuvuudet tulevat olemaan tulevaisuudessa näkyvämpiä kuluttajapuolella. Koska osa NLP-hyökkäyksistä on lähestulkoon huomaamattomia \citep{triggerless}, voidaan hyökkäyksiä suorittaa yhä enemmän osapuolista ja intresseistä riippumatta. Ympäristöaktivistit saattavat haluta manipuoloida Googlen kuvahaun NLP-Mallin liittämään possuihin liittyneen ympäristöinsidentin lentokoneyhtiöön x (kuva 4.1).
-\begin{figure}[ht]
-  \includegraphics[scale=0.4]{figures/piggie.png}
-  \caption{Hyökkäys lentoyhtiötä kohtaan. \citep{adversexamples}}
-\end{figure}
+Käydään läpi puolustusmenetelmät NLP-hyökkäyksiä vastaan.
 
-Vastakkaishyökkäysten motiivit muovautuvat siis ajan myötä ja kasvattavat tahtomattaan näin hyökkäystaksonomiaa. 
+\section{OCR-puolustus}
+NLP-hyökkäykset voidaan torjua korkean tason abstraktiolla korkealla yleisrasituksella sekä alemman tason abstraktiolla alemmalla yleisrasituksella. Näytöltäluvun (eng. OCR, On-Screen-Reading) avulla epäselvyydet tekstin aidosta luonteesta voidaan hahmontaa uudelleen tulkitsemalla aineisto uudestaan visuaalisesti. Tämä menetelmä lisää yleisrasitusta huomattavasti riippuen käyttötarkoituksesta, mutta poistaa pahantahtoiset merkit ilman NLP-mallin uudelleenkoulutusta. \citep{boucher2021bad}
 
-Hyökkäystaksonomia laajentuu tulevaisuudessa eri formaatteihin. Koneoppimisen kukoistaessa voidaan NLP-malleja soveltaa tiedon ääni -tai videoformaatteihin. Tämä antaa puolestaan mahdollisuuden vastakkaishyökätä kyseiseen koneoppimismallia vastaan. Formaattien sisältäkin löytyy erinäisiä hyökkäysrajapintoja. Esimerkiksi ääniformaateissa käytetään kuhunkin käyttötarkoitukseen sopivaa enkoodausta. Ei siis riitä, että hyökättävää ja puolustettavaa tulee uusien formaattien myötä, sillä formaattien sisälläkin tulee tapahtumaan jatkuvasti huomattavaa kehitystä.
+\section{Suorituskykykeskeinen puolustus}
+Keskitymme seuraavaksi näkymättömiin merkkeihin, -homoglyfeihin, \-uudelleenjärjestelyihin -ja poistatuksiin perustuvien hyökkyksien puolustamiseen. Suorituskykykeskeiset puolustusmenetelmät ovat kuitenkin laskennallisesti kalliita, eivätkä koneoppimismallin ulkoistaneet yritykset yleensä pysty kustantamaan kyseisiä metodeita \citep{https://doi.org/10.48550/arxiv.1911.07399}.
 
-Haavoittuvuuksien löytö ruokkii itse itseään. Ensimmäisten vastakkaishyökkäysten kohdistuessa uuteen tietoformaattiin, syntyy tarve puolustukseen tätä vastaan. Toteutuksesta riippuen puolustusmenetelmän selvittäminen saattaa avata uusia ovia, jotka hyödyttävät hyökkääjiä. Usein haavoittuvuuden tarkastelu vastakkaishyökkäyksissä avaa enemmän mahdollisuuksia uusille hyökkäyksille kuin vanhojen hyökkäysten puolustuksille. Tämä näkyy muun muassa GitHub-repositoriossa \textit{Must-read Papers on Textual Adversarial Attack and Defense (TAAD)}, jossa hyökkäystutkimusten määrä suhteessa puolustustutkimusten määrään on $75:23$ (kuva 4.2).
+Tietyt näkymättömät merkit voidaan poistaa suoraan syötteestä. Mikäli sovelluksessa näitä merkkejä ei voida poistaa, voidaan ne korvata \textit{ei-}\texttt{<unk>} upotuksilla. Korvaus tapahtuu lähdekielisanakirjassa, jonne kuvataan tuntematon merkki ''ei-tuntemattomaksi tokeniksi''. Näin tuntemattomat merkit eivät voi häiritä ladontaa merkeillä, joista ladontamoottori ei ole aivan varma. \citep{boucher2021bad}
 
-\begin{figure}[ht]
-  \includegraphics[scale=0.4]{figures/github-papers.png}
-  \caption{Hyökkäystutkimusten määrä verrattuna puolustustutkimuksiin.}
-\end{figure}
+Homoglyfihyökkäysten torjuminen OCR-menetelmällä on ymmärrettävästi vaikeampaa verrattuina muihin merkkeihin. Paras keino torjua tällaisia hyökkäyksiä olisi kuvata osa homoglyfeistä niiden yleisemmin tunnettuihin vastineisiin. NLP-mallin ylläpitäjä joutuu tekemään tässä siis suurimman työn. \citep{boucher2021bad}
+
+Uudelleenjärjestelyhyökkäykset voidaan torjua riisumalla kaksisuuntais-ohjausmerkit\\syötteestä, varoittamalla käyttäjää kaksisuuntais-ohjausmerkkien ilmestyessä syötteeseen tai käyttämällä kaksisuuntais-algoritmia halutun syötteen selvittämiseen. Puolustusmenetelmän valinta riippuu kontekstista, sillä esimerkiksi latinaa tai arabiaa kirjoittaessa ohjelma toimisi väärin pakottamalla käyttäjän syötteestä pois kaksisuuntais-ohjausmerkin \texttt{U+200F}. \citep{boucher2021bad}
+
+Poistatukset yleensä havaitaan NLP-mallien ulkopuolella syötteen annon alkuvaiheessa. NLP-mallin tasolla tähän tarvitsee harvemmin puuttua ja käyttäjälle voidaan pahimmassa tapauksessa lähettää varoitus poistatusmerkkien olemassaolosta syötteessä. On silti tärkeää tiedostaa poistatuksien puolustus, mikäli käyttöjärjestelmä unohtaa puuttua kyseiseen hyökkäysrajapintaan. \citep{boucher2021bad}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Määritelmä}
+
+\begin{definition}
+  Olkoon luokitin $C$. Datavektorin $x$ vastakkaisesimerkki $\varepsilon$ on toinen datavektori $x'$ niin, että $||x-x'||\leq \varepsilon$, mutta $C(x) \not = C(x')$.
+\end{definition}
+
+\begin{definition}
+  Olkoon luokitin $C$. Datavektorin $x$ vahva vastakkaisesimerkki $(\varepsilon, \delta)$ on toinen datavektori $x'$ niin, että $||x-x'||\leq \varepsilon$ ja $|(x-x')\cdot \mu|\leq\delta$, mutta $C(x) \not = C(x')$.
+\end{definition}
+
+Tutkielmassa ehdotetaan puolustusmetodeita perustuen ylläoleviin määritelmiin sekä niiden sovelluksiin käyttäen lineaarisia luokittimia.
