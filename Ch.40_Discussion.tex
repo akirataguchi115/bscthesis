@@ -1,6 +1,6 @@
 \chapter{Hyökkäyksiltä suojautuminen\label{discussion}}
 
-Käydään läpi puolustusmenetelmät NLP-hyökkäyksiä vastaan.
+Tässä kappaleessa käydään läpi erilaisia puolustusmenetelmiä NLP-hyökkäyksiä vastaan. Ensiksi esitellään OCR-puolustus, sitten kuvataan suorituskeskeinen puolustautuminen.
 
 \section{OCR-puolustus}
 NLP-hyökkäykset voidaan torjua korkean tason abstraktiolla korkealla yleisrasituksella sekä alemman tason abstraktiolla alemmalla yleisrasituksella. Näytöltäluvun (eng. OCR, On-Screen-Reading) avulla epäselvyydet tekstin aidosta luonteesta voidaan hahmontaa uudelleen tulkitsemalla aineisto uudestaan visuaalisesti. Tämä menetelmä lisää yleisrasitusta huomattavasti riippuen käyttötarkoituksesta, mutta poistaa pahantahtoiset merkit ilman NLP-mallin uudelleenkoulutusta. \citep{boucher2021bad}
@@ -8,23 +8,10 @@ NLP-hyökkäykset voidaan torjua korkean tason abstraktiolla korkealla yleisrasi
 \section{Suorituskykykeskeinen puolustus}
 Keskitymme seuraavaksi näkymättömiin merkkeihin, -homoglyfeihin, \-uudelleenjärjestelyihin -ja poistatuksiin perustuvien hyökkyksien puolustamiseen. Suorituskykykeskeiset puolustusmenetelmät ovat kuitenkin laskennallisesti kalliita, eivätkä koneoppimismallin ulkoistaneet yritykset yleensä pysty kustantamaan kyseisiä metodeita \citep{https://doi.org/10.48550/arxiv.1911.07399}.
 
-Tietyt näkymättömät merkit voidaan poistaa suoraan syötteestä. Mikäli sovelluksessa näitä merkkejä ei voida poistaa, voidaan ne korvata \textit{ei-}\texttt{<unk>} upotuksilla. Korvaus tapahtuu lähdekielisanakirjassa, jonne kuvataan tuntematon merkki ''ei-tuntemattomaksi tokeniksi''. Näin tuntemattomat merkit eivät voi häiritä ladontaa merkeillä, joista ladontamoottori ei ole aivan varma. \citep{boucher2021bad}
+Näkymättöimen merkkein tapauksessa, tietyt näkymättömät merkit voidaan poistaa suoraan syötteestä. Mikäli sovelluksessa näitä merkkejä ei voida poistaa, voidaan ne korvata \textit{ei-}\texttt{<unk>} upotuksilla. Korvaus tapahtuu lähdekielisanakirjassa, jonne kuvataan tuntematon merkki ''ei-tuntemattomaksi tokeniksi''. Näin tuntemattomat merkit eivät voi häiritä ladontaa merkeillä, joista ladontamoottori ei ole aivan varma. \citep{boucher2021bad}
 
 Homoglyfihyökkäysten torjuminen OCR-menetelmällä on ymmärrettävästi vaikeampaa verrattuina muihin merkkeihin. Paras keino torjua tällaisia hyökkäyksiä olisi kuvata osa homoglyfeistä niiden yleisemmin tunnettuihin vastineisiin. NLP-mallin ylläpitäjä joutuu tekemään tässä siis suurimman työn. \citep{boucher2021bad}
 
 Uudelleenjärjestelyhyökkäykset voidaan torjua riisumalla kaksisuuntais-ohjausmerkit\\syötteestä, varoittamalla käyttäjää kaksisuuntais-ohjausmerkkien ilmestyessä syötteeseen tai käyttämällä kaksisuuntais-algoritmia halutun syötteen selvittämiseen. Puolustusmenetelmän valinta riippuu kontekstista, sillä esimerkiksi latinaa tai arabiaa kirjoittaessa ohjelma toimisi väärin pakottamalla käyttäjän syötteestä pois kaksisuuntais-ohjausmerkin \texttt{U+200F}. \citep{boucher2021bad}
 
 Poistatukset yleensä havaitaan NLP-mallien ulkopuolella syötteen annon alkuvaiheessa. NLP-mallin tasolla tähän tarvitsee harvemmin puuttua ja käyttäjälle voidaan pahimmassa tapauksessa lähettää varoitus poistatusmerkkien olemassaolosta syötteessä. On silti tärkeää tiedostaa poistatuksien puolustus, mikäli käyttöjärjestelmä unohtaa puuttua kyseiseen hyökkäysrajapintaan. \citep{boucher2021bad}
-
-\theoremstyle{definition}
-\newtheorem{definition}{Määritelmä}
-
-\begin{definition}
-  Olkoon luokitin $C$. Datavektorin $x$ vastakkaisesimerkki $\varepsilon$ on toinen datavektori $x'$ niin, että $||x-x'||\leq \varepsilon$, mutta $C(x) \not = C(x')$.
-\end{definition}
-
-\begin{definition}
-  Olkoon luokitin $C$. Datavektorin $x$ vahva vastakkaisesimerkki $(\varepsilon, \delta)$ on toinen datavektori $x'$ niin, että $||x-x'||\leq \varepsilon$ ja $|(x-x')\cdot \mu|\leq\delta$, mutta $C(x) \not = C(x')$.
-\end{definition}
-
-Tutkielmassa ehdotetaan puolustusmetodeita perustuen ylläoleviin määritelmiin sekä niiden sovelluksiin käyttäen lineaarisia luokittimia.
