@@ -3,21 +3,16 @@
 Tässä kappaleessa käydään läpi hyökkästaksonomia, eli hyökkäysrajapinta, NLP-malleja vastaan. Ensin käydään läpi roskapostisuodatuksen roskapostisuodatuksen ohitus, joka on NLP-hyökkäysten keskiössä. Sitten esittelen neuroverkkohyökkäykset, sensuuriohituksen sekä ladontahyökkäykset.
 
 \section{Roskapostisuodatuksen ohitus}
-Vastakkaishyökkäyksiä voidaan käyttää sähköposteissa roskapostisuodattimien ohitukseen. Roskapostisuodattimet toimivat koulutettujen NLP-mallien mukaan. Nämä mallit merkkaavat vastaanotetut sähköpostit joko hyväntahtoisiksi tai pahantahtoisiksi, eli roskaposteiksi. \citet{spamfilter}
+Vastakkaishyökkäyksiä voidaan käyttää sähköposteissa roskapostisuodattimien ohitukseen. Roskapostisuodattimet toimivat koulutettujen NLP-mallien mukaan. Nämä mallit merkkaavat vastaanotetut sähköpostit joko hyväntahtoisiksi tai pahantahtoisiksi, eli roskaposteiksi \citep{spamfilter}.
 
-Suodattimia vastaan toimii kolme vastakkaishyökkäystä: (1) Synonyymin korvaus, (2) kelposanan injektointi sekä (3) roskapostisanojen väljennys. Sana ''kelpo'' tarkoittaa tässä yhteydessä tekstiä, jonka roskapostisuodatin on merkinnyt hyväntahtoiseksi. Synonyymin korvauksessa tarkoitus on korvata pahantahtoiset sanat hyväntahtoisiksi luokitelluilla synonyymeillä. Sanojen synonyymisyys lasketaan taulukon 2.1 tapauksessa kuvan 2.1 kosini-samankaltaisuudella (taulukko 2.1). Kelposanan injektoinnissa kelposanoja lisätään sähköpostiin niin paljon, kunnes NLP-malli tunnistaa roskapostin olevan kelpopostia. Kelposanoja voidaan injektoida tietokannoista roskaposteihin muuttamatta viestin tarkoitusta rajusti. Roskapostisanojen väljennyksessä roskapostisanoihin sisällytetään välilyöntejä, jotta NLP-malli ei tunnistaisi näitä sanoja roskasanoiksi. Kun väljennystä on harjoitettu tarpeeksi, muuttuu roskaposti NLP-mallin näkökulmasta kelpopostiksi. \citep{spamfilter}
+Suodattimia vastaan toimii kolme vastakkaishyökkäystä: (1) Synonyymin korvaus, (2) kelposanan injektointi sekä (3) roskapostisanojen väljennys. Sana ''kelpo'' tarkoittaa tässä yhteydessä tekstiä, jonka roskapostisuodatin on merkinnyt hyväntahtoiseksi. Synonyymin korvauksessa tarkoitus on korvata pahantahtoiset sanat hyväntahtoisiksi luokitelluilla synonyymeillä. Lauseiden samankaltaisuuksien vertailua demonstroidaan taulukossa 3.1. Pahantahtoisissa lauseissa pyritään nostattamaan samankaltaisuusastetta vaihtamalla sanoja synonyymeihin, kunnes NLP-malli tunnistaa viestin olevan kelpopostia. Kelposanan injektoinnissa kelposanoja lisätään sähköpostiin niin paljon, kunnes NLP-malli tunnistaa roskapostin olevan kelpopostia. Kelposanoja voidaan injektoida tietokannoista roskaposteihin muuttamatta viestin tarkoitusta rajusti. Roskapostisanojen väljennyksessä roskapostisanoihin sisällytetään välilyöntejä, jotta NLP-malli ei tunnistaisi näitä sanoja roskasanoiksi. Kun väljennystä on harjoitettu tarpeeksi, muuttuu roskaposti NLP-mallin näkökulmasta kelpopostiksi. \citep{spamfilter}
 
 Kelposanan injektoinnille ja roskasanojen väljennykselle on olemassa erilaisia implementaatioita. Seuraavissa alaluvuissa tutustutaan ladontapohjaisiin vastakkaishyökkäyksiin. Muun muassa näitä hyökkäysmetodeita voidaan käyttää kahdessa aiemmin mainitussa roskapostisuodattimeen kohdistetussa hyökkäyksessä. Implementaatioita yhdistelemällä ja vaihtelemalla, saattaa NLP-mallin pahantahtoisuuden havaitseminen heikentyä entisestään, taaten hyökkääjälle varmemman onnistumisen.
-
-\begin{figure}[ht]
-  \includegraphics[scale=0.3]{figures/cosine.png}
-  \caption{Sähköpostien samankaltaisuus voidaan laskea käyttäen kosini-samankaltaisuutta kahden sähköpostivektorin välillä. \citep{spamfilter}}
-\end{figure}
 
 \begin{table}[t]
   \begin{tabularx}{\textwidth}{| X | l | c |}
     \hline
-    Muokattu viesti                                                                                                                                                                                                                                            & Kosini-saman\-kaltaisuus & Ennustus    \\
+    Muokattu viesti                                                                                                                                                                                                                                            & Samankaltaisuus & Ennustus    \\
     \hline
     Ringtone Club: Get the UK singles chart on your mobile each week and choose any top quality ringtone! This message is free of charge.                                                                                                                      & 1                        & roskapostia \\
     \hline
@@ -30,9 +25,6 @@ Kelposanan injektoinnille ja roskasanojen väljennykselle on olemassa erilaisia 
   \end{tabularx}
   \caption{Synonyymin korvaus. Vanhan viestin korvatut osat on lihavoitu. \citep{spamfilter}}
 \end{table}
-
-\section{Neuroverkkohyökkäykset}
-Sanatason vastakkaishyökkäykset syvää oppimisverkkoa vastaan paljastavat  näiden verkkojen heikkouksia. Vastakkaishyökkääminen näitä verkkoja vastaan on vaikeaa verrattuna kuvatason hyökkäyksiin. Tämä johtuu lauseiden diskreetistä luonteesta. Pienikin sana- tai merkkimuutos vaikuttaa lauseen viestiin sekä todennäköisemmin viestin luokitukseen, jonka NLP-malli päättää. \citep{neural}
 
 \section{Sensuurin ohitus}
 Koska sensuuria voidaan soveltaa hyödyntäen koneoppimismalleja, voidaan sensuuri myös ohittaa hyödyntäen koneoppimismallin heikkouksia. Vastakkaishyökkäys voisi tunnistaa sensurointia aiheuttavia pikseliyhdistelmiä, ja tässä tutkimuksessa esiteltyjä hyökkäystapoja käyttäen sensuurin laukaiseminen voidaan estää. Tällöin kyseessä ei kuitenkaan enää ole puhdas merkintä (eng. clean label), sillä vastakkaishyökkäyksen todellinen tarkoitus näkyy käyttäjälle silmintarkasteltavana \citep{triggerless}. Puhtaan merkinnän uupuessa esimerkiksi tekstipohjaisessa vastakkaishyökkäyksessä mahdollissta myös helpomman puolustautumisen \citep{pruthi2019}.
