@@ -1,5 +1,22 @@
 \chapter{Tekstin automaattinen luokitus\label{methods}}
 
-NLP-luokittimia, eli NLP-malleja käytetään tapauksiin, joissa on tehokkaampaa korvata ihmisen manuaalinen tekemä tarkastustyö. Näihin tapauksiin kuuluvat muun muassa roskapostin tunnistus sekä vihapuheen tunnistus sosiaalisesta mediasta. Esimerkiksi Twitterissä käytetään NLP-malleja tunnistamaan sopimatonta sisältä twiiteistä \citep{twitternlp}.
+NLP-luokittimia, eli NLP-malleja käytetään analysoimaan tekstiä, joissa on tehokkaampaa korvata ihmisen manuaalisesti tekemä analysointityö. Ensin käydään läpi neljä yleistä tapausta tekstin automaattisesta luokituksesta. Nämä neljä tapausta ovat roskapostin suodatus sähköposteista, vihapuheen sensurointi sosiaalisesta mediasta, valearviointien tunnistus nettikauppojen arvosteluosiosista sekä sentimenttianalyysi. Lopuksi käydään läpi tekstin automaattisen luokituksen edut verrattuna manuaaliseen, ihmisen tekemään luokitustyöhön.
 
-Tämä kaikki tarkastustyö voitaisiin tehdä manuaalisesti käsin, mutta tarkastettavan sisällön määrän vuoksi tämä ei ole käytännössä mahdollista. Tietoteknistaitoinen ihminen pystyisi tarkastamaan vastaanotetusta sähköpostista, mikäli kyseinen sähköposti olisi esimerkiksi kalasteluroskapostia. Koska roskapostia lähetetään automaattisesti jokaiseen olemassa olevaan sähköpostiosoitteeseen päivittäin, menisi roskapostien tunnistamiseen ihmiseltä liian kauan aikaa päivittäin. Tämän takia useimmissa sähköpostiohjelmissa tulee mukana automaattisesti roskapostia suodattava NLP-malli, joka päästää läpi vain sähköpostit, joista NLP-malli ei ole varma, onko se roskapostia. Perehdytään seuraavassa kappaleessa tarkemmin tämän suodattimen ohitukseen. Tämä haavoittuvaisuus on läsnä myös muissa sovelluksissa, joissa käytetään NLP-mallia.
+\section{Roskapostien suodatus}
+
+Sähköpostien automaattinen luokitus roskaposteiksi tai kelpoposteiksi onnistuu NLP-mal\-lien avulla. Noin 70\% liiketoiminnan sähköposteista on roskapostia. Näiden roskapostien tarkoitus voi muun muassa olla petkutusta, ärsyttämistä tai loukkaamista \citep{spam}.
+
+Roskapostin vaikutukset käyttäjästä riippuen ovat niin vakavia, että sähköpostipalvelun tarjoajan intresseissä on implementoida roskapostisuodatin. Roskapostit saattavat sisältää viestin avaajaa järkyttävää tai provosoivaa mediaa. Roskaposti saattaa sisältää myös kalasteluyrityksen. Kalasteluhyökkäyksessä tarkoituksena on petkuttaa käyttäjää antamaan erilaisia tunnus-salasana-yhdistelmiä liittämällä roskapostiin esimerkiksi linkin viralliselta näyttävältä sivulle. Sivulla käyttäjää kehotetaan kirjautumaan tunnuksillaan tuttuun palveluun, mutta oikeasti palvelu vain varastaa käyttäjän tunnukset. Roskaposti saattaa myös sisältää haittaohjelmia, joita käyttäjä voi saada koneelleen muun muassa lataamalla ja suorittamalla sähköpostin tiedostoja tai vierailemalla pahantahtoisella sivustolla. Tämä pahantahtoinen sivusto usein sisältää koodia, joka hyväksikäyttää usein jotain selaimen haavoittuvaisuutta esimerkiksi asentaakseen tietokoneelle haittaohjelmia. Myös kiristysviestejä sekä sähköposteja eteenpäinlähettäviä haittaohjelmia kulkee roskapostien mukana, joita sähköpostipalvelun tarjoajat pyrkivät estämään roskapostisuodattimilla.
+
+\section{Vihapuheen sensurointi}
+
+Vihapuheen riittävään sensurointiin tarvitaan luonnollisen kielen käsittelyä. Suodattimen rakentaminen vihapuhetta vastaan pelkkien avainsanojen perusteella ei tuota toivottuja tuloksia, koska katsotun vihapuheen sensuroinnille tarvitaan muun muassa meneillään olevan keskustelun suunta, tarkka ajanhetki, ajankohtaiset maailman tapahtumat, lähettäjän sekä vastaanottajan henkilöllisyys sekä kontekstuaaliset mediat, esimerkiksi kuvat, videot tai ääni \citep{hate}.
+
+\section{Valearviointien tunnistus}
+
+\section{Sentimenttianalyysi}
+
+
+\section{Manuaalinen luokitus}
+
+Tämä kaikki tarkastustyö voitaisiin tehdä manuaalisesti, mutta tarkastettavan sisällön määrän vuoksi tämä ei ole käytännössä mahdollista. Tietoteknistaitoinen ihminen pystyisi tarkastamaan vastaanotetusta sähköpostista, mikäli kyseinen sähköposti olisi esimerkiksi kalasteluroskapostia. Koska roskapostia lähetetään automaattisesti jokaiseen olemassa olevaan sähköpostiosoitteeseen päivittäin, menisi roskapostien tunnistamiseen ihmiseltä liian kauan aikaa päivittäin. Tämän takia useimmissa sähköpostiohjelmissa tulee mukana automaattisesti roskapostia suodattava NLP-malli, joka päästää läpi vain sähköpostit, joista NLP-malli ei ole varma, onko se roskapostia. Perehdytään seuraavassa kappaleessa tarkemmin tämän suodattimen ohitukseen. Tämä haavoittuvaisuus on läsnä myös muissa sovelluksissa, joissa käytetään NLP-mallia.

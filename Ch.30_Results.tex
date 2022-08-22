@@ -10,17 +10,17 @@ Suodattimia vastaan toimii kolme vastakkaishyökkäystä: (1) Synonyymin korvaus
 Kelposanan injektoinnille ja roskasanojen väljennykselle on olemassa erilaisia implementaatioita. Seuraavissa alaluvuissa tutustutaan ladontapohjaisiin vastakkaishyökkäyksiin. Muun muassa näitä hyökkäysmetodeita voidaan käyttää kahdessa aiemmin mainitussa roskapostisuodattimeen kohdistetussa hyökkäyksessä. Implementaatioita yhdistelemällä ja vaihtelemalla, saattaa NLP-mallin pahantahtoisuuden havaitseminen heikentyä entisestään, taaten hyökkääjälle varmemman onnistumisen.
 
 \begin{table}[t]
-  \begin{tabularx}{\textwidth}{| X | l | c |}
+  \begin{tabularx}{\textwidth}{| >{\raggedright\arraybackslash}X | l | c |}
     \hline
-    Muokattu viesti                                                                                                                                                                                                                                            & Samankaltaisuus & Ennustus    \\
+    Muokattu viesti & Samankaltaisuus & Ennustus\\
     \hline
-    Ringtone Club: Get the UK singles chart on your mobile each week and choose any top quality ringtone! This message is free of charge.                                                                                                                      & 1                        & roskapostia \\
+    Ringtone Club: Get the UK singles chart on your mobile each week and choose any top quality ringtone! This message is free of charge. & 1 & roskapostia\\
     \hline
-    Ringtone Club: \textbf{acquire} the UK single \textbf{graph} on your \textbf{Mobile\_River} each \textbf{hebdomad} and \textbf{take} any \textbf{top\_side} \textbf{caliber} ringtone! This \textbf{content} is \textbf{free\_people} of charge.           & $0,583$                  & roskapostia \\
+    Ringtone Club: \textbf{acquire} the UK single \textbf{graph} on your \textbf{Mobile\_River} each \textbf{hebdomad} and \textbf{take} any \textbf{top\_side} \textbf{caliber} ringtone! This \textbf{content} is \textbf{free\_people} of charge. & $0,583$ & roskapostia\\
     \hline
-    Ringtone Club: \textbf{become} the UK \textbf{bingle} \textbf{graph} on your \textbf{nomadic} each \textbf{workweek} and \textbf{select} any \textbf{upper\_side} \textbf{caliber} ringtone! This \textbf{subject\_matter} is \textbf{liberate} of charge. & $0,583$                  & roskapostia \\
+    Ringtone Club: \textbf{become} the UK \textbf{bingle} \textbf{graph} on your \textbf{nomadic} each \textbf{workweek} and \textbf{select} any \textbf{upper\_side} \textbf{caliber} ringtone! This \textbf{subject\_matter} is \textbf{liberate} of charge. & $0,583$ & roskapostia \\
     \hline
-    Ringtone Club: \textbf{go} the UK \textbf{one} \textbf{graph} on your \textbf{peregrine} each \textbf{calendar\_week} and \textbf{pick\_out} any \textbf{upside} \textbf{character} ringtone! This \textbf{substance} is \textbf{release} of charge.       & $0,583$                  & kelpopostia \\
+    Ringtone Club: \textbf{go} the UK \textbf{one} \textbf{graph} on your \textbf{peregrine} each \textbf{calendar\_week} and \textbf{pick\_out} any \textbf{upside} \textbf{character} ringtone! This \textbf{substance} is \textbf{release} of charge. & $0,583$ & kelpopostia \\
     \hline
   \end{tabularx}
   \caption{Synonyymin korvaus. Vanhan viestin korvatut osat on lihavoitu. \citep{spamfilter}}
