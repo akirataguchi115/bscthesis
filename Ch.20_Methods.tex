@@ -1,6 +1,6 @@
 \chapter{Tekstin automaattinen luokitus\label{methods}}
 
-NLP-luokittimia, eli NLP-malleja käytetään analysoimaan tekstiä, joissa on tehokkaampaa korvata ihmisen manuaalisesti tekemä analysointityö. Ensin käydään läpi neljä yleistä tapausta tekstin automaattisesta luokituksesta. Nämä neljä tapausta ovat roskapostin suodatus sähköposteista, vihapuheen sensurointi sosiaalisesta mediasta, valearviointien tunnistus nettikauppojen arvosteluosiosista sekä sentimenttianalyysi. Lopuksi käydään läpi tekstin automaattisen luokituksen edut verrattuna manuaaliseen, ihmisen tekemään luokitustyöhön.
+NLP-luokittimia, eli NLP-malleja käytetään analysoimaan tekstiä, joissa on tehokkaampaa korvata ihmisen manuaalisesti tekemä analysointityö. Ensin käydään läpi neljä yleistä tapausta tekstin automaattisesta luokituksesta. Nämä neljä tapausta ovat roskapostin suodatus sähköposteista, vihapuheen sensurointi sosiaalisesta mediasta, valearvosteluiden tunnistus nettikauppojen arvosteluosioista sekä sentimenttianalyysi. Lopuksi käydään läpi tekstin automaattisen luokituksen edut verrattuna manuaaliseen, ihmisen tekemään luokitustyöhön.
 
 \section{Roskapostien suodatus}
 
@@ -13,6 +13,9 @@ Roskapostin vaikutukset käyttäjästä riippuen ovat niin vakavia, että sähk�
 Vihapuheen riittävään sensurointiin tarvitaan luonnollisen kielen käsittelyä. Suodattimen rakentaminen vihapuhetta vastaan pelkkien avainsanojen perusteella ei tuota toivottuja tuloksia, koska katsotun vihapuheen sensuroinnille tarvitaan muun muassa meneillään olevan keskustelun suunta, tarkka ajanhetki, ajankohtaiset maailman tapahtumat, lähettäjän sekä vastaanottajan henkilöllisyys sekä kontekstuaaliset mediat, esimerkiksi kuvat, videot tai ääni \citep{hate}.
 
 \section{Valearviointien tunnistus}
+Ostosten tekemisten mahdollisuuden netissä sekä tuotteiden hyvän saatavuuden vuoksi kuluttajat joutuvat perustelemaan ostopäätöksensä yhä useammin tuotearvosteluihin. Oikeiden arvosteluiden lisäksi tuotesivulla saattaa olla valearvosteluja. Luonnollisen kielen käsittelyyn perustuvalla tekniikalla voidaan kyseiset valoarvostelut tunnistaa ja tuhota \citep{falsereview}.
+
+Valearvostelujen määrä ja kieliasu ovat pääsyyt NLP-luokittimien käyttöön edellä mainitussa käyttökohteessa. Valearvosteluita voidaan tuottaa eri syistä. esimerkiksi tuotteen näennäisen arvon laskeminen kilpailullisen tuotteen näennäisen arvon nostamiseksi.  Valearvosteluita voidaan myös tehdä myös pelkästään pahantahtoisella tarkoituksella alentaa tuotteen näennäisarvoa. Luokitin tunnistaa suuresta määrästä arvosteluja valearvostelut, vaikka kieliasu ei olisikaan formaali. Tässäkään tapauksessa pelkkä avainsanafiltteri ei riitä tunnistamaan valearvosteluita aidoista arvosteluista. Valearvostelujen tunnistus luonnollisen kielen avulla on markkinallisista syistä verkkokauppojen intresseissä.
 
 \section{Sentimenttianalyysi}
 
