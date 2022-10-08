@@ -2,7 +2,7 @@
 
 NLP-luokittimia vastaan, jotka ovat automaattisen tekstin luokituksen keskiössä, voidaan hyökätä. Tässä kappaleessa käydään läpi hyökkäystyypit NLP-luokittimia vastaan. Ensin käydään läpi roskapostisuodatuksen roskapostisuodatuksen ohitus, joka on NLP-hyökkäysten keskiössä. Sitten esitellään sensuuriohitus sekä ladontahyökkäykset. Ladontahyökkäyksistä käydään läpi näkymättömät merkit, homoglyfit, uudelleenjärjestelyt sekä poistatukset.
 
-\section{Roskapostisuodatuksen ohitus}
+\section{Roskapostin naamiointi asiapostiksi}
 Vastakkaishyökkäyksiä voidaan käyttää sähköposteissa roskapostisuodattimien ohitukseen. Roskapostisuodattimet toimivat koulutettujen NLP-luokittimien mukaan. Nämä luokittimet luokittelevat vastaanotetut sähköpostit joko hyväntahtoisiksi tai pahantahtoisiksi, eli roskaposteiksi \citep{spamfilter}.
 
 Suodattimia vastaan toimii kolme vastakkaishyökkäystä. (1) Synonyymin korvaus. Synonyymin korvauksessa tarkoitus on korvata pahantahtoiset sanat hyväntahtoisiksi luokitelluilla synonyymeillä. Lauseiden samankaltaisuuksien vertailua demonstroidaan taulukossa 3.1. Ensimmäisessä sarakkeessa on viesti, jonka luokitin luokittelee joko roskapostiksi tai asiapostiksi toisessa sarakkeessa. Taulukon viimeinen rivi demonstroi synonyymien kovauksen läpäisevän roskapostisuodattimen. Pahantahtoisissa lauseissa pyritään nostattamaan samankaltaisuusastetta vaihtamalla sanoja synonyymeihin, kunnes NLP-luokitin tunnistaa viestin olevan asiapostia. (2) asiasanan injektointi. Asiasanan injektoinnissa asiasanoja lisätään sähköpostiin niin paljon, kunnes NLP-luokitin tunnistaa roskapostin olevan asiapostia. Sana ''asiaposti'' tarkoittaa tässä yhteydessä tekstiä, jonka roskapostisuodatin on luokitellut hyväntahtoiseksi. Asiasanoja voidaan injektoida tietokannoista roskaposteihin muuttamatta viestin tarkoitusta rajusti. (3) roskapostisanojen väljennys. Roskapostisanojen väljennyksessä roskapostisanoihin sisällytetään välilyöntejä, jotta NLP-luokitin ei tunnistaisi näitä sanoja roskasanoiksi. Kun väljennystä on harjoitettu tarpeeksi, muuttuu roskaposti NLP-luokittimen näkökulmasta asiapostiksi. \citep{spamfilter}
@@ -38,35 +38,72 @@ syrjäyttää positiivisuudella syöttämällä NLP-luokittimelle sen sijaan tek
 \texttt{Mikä py\textcolor{red}{U+200B}häinhäv\textcolor{red}{U+200B}äisty\textcolor{red}{U+200B}ksen\textcolor{red}{U+200B} rakennus!\\
   Miten onnistuit tekemään tämän \textcolor{red}{U+200B}nä\textcolor{red}{U+200B}in la\textcolor{red}{U+200B}iskas\textcolor{red}{U+200B}ti?}.
 
-Kuva 3.1 on esimerkki kontekstin syrjäyttämisestä näkymättömillä merkeillä. Esimerkissä tapahtuu käännös englannin kielestä ranskan kieleen.
-\begin{figure}[hbt]
-  \includegraphics[scale=0.599]{figures/invisible.png}
+Taulukko 3.2 on esimerkki kontekstin syrjäyttämisestä näkymättömillä merkeillä. Esimerkissä tapahtuu käännös englannin kielestä ranskan kieleen. Vasemassa sarakkeessa on alkuperäinen, käännettävä viesti. Vasemmassa sarakkeessa taas on käännetty viesti ranskaksi. Alleviivattuihien kohtien väliin on upotettu nollatilavuuden välilyönti-merkki \texttt{U+200B}. Ihmiselle käännettävät viestit näyttävät samanlaisilta, mutta kääntäjälle jälkimmäisessä viestissä on kolme välilyöntiä enemmän. Viimeinen viesti pitäisi kääntyä viestiksi ''Teknologia on olemassa sitä varten''. Käännös on kuitenkin hyökkäyksen jälkeen ''Ympäristön kronologia on kronologia ympäristöstä ympäristölle''.
+
+\begin{table}[hbt]
+  \begin{tabular}{| l | m{20em} |}
+    \hline
+    Alkuperäinen viesti & Käännös\\
+    \hline
+    The technology is there to do it. & La technologie est là pour le faire.\\
+    \hline
+    The t\underline{ec}hnology is \underline{ t}here to\underline{ d}o it. & La chnologie de l'environnement est la chnologie de l'environnement à l'environnement.\\
+    \hline
+  \end{tabular}
   \caption{Hyökkäys näkymättömillä merkeillä \citep{boucher2021bad}}
-\end{figure}
+\end{table}
 
 \section{Homoglyfit}
-Homoglyfihyökkäykset NLP-luokittimia vastaan pohjautuvat siihen, että pahantahtoisten\\ merkkien viralliset esitysmuodot näyttäytyvät hyväntahtoisilta merkkien virallisilta esityksiltä. Jois\-sain kielissä tekstin merkitys muuttuu täysin yhden merkin vaihtuessa. Esimerkkinä homoglyfistä on \texttt{A $\rightarrow$ A}, missä viimeinen kirjain on todellisuudessa kyrillinen kirjain A. Kuvassa 3.2 homoglyfihyökkäys on muuntanut englanninkielisen tekstin\\ \texttt{I just can't belive where she was} ranskankieliseen käännökseen\\ \texttt{I guess I can't underestimate the location of the scribe and}.
-\begin{figure}[hbt]
-  \includegraphics[scale=0.599]{figures/homoglyph.png}
+Homoglyfihyökkäykset NLP-luokittimia vastaan pohjautuvat siihen, että pahantahtoisten\\ merkkien viralliset esitysmuodot näyttäytyvät hyväntahtoisilta merkkien virallisilta esityksiltä. Jois\-sain kielissä tekstin merkitys muuttuu täysin yhden merkin vaihtuessa. Esimerkkinä homoglyfistä on \texttt{A $\rightarrow$ A}, missä viimeinen kirjain on todellisuudessa kyrillinen kirjain A. Taulkossa 3.3 homoglyfihyökkäys on muuntanut englanninkielisen tekstin\\ \texttt{I just can't belive where she was} ranskankieliseen käännökseen\\ \texttt{I guess I can't underestimate the location of the scribe and}.\\
+Näkymättömien merkkien lailla homoglyfihyökkäyksen toteutus riippuu ympäristön fontista. \citep{boucher2021bad}
+
+\begin{table}[hbt]
+  \begin{tabular}{| l | m{20em} |}
+    \hline
+    Alkuperäinen viesti & Käännös\\
+    \hline
+    I just can't believe where she was. & Je ne peux tout simplement psa croire où elle était.\\
+    \hline
+    I \underline{j}ust can't bel\underline{i}eve where s\underline{h}e was. & Je crois que je ne peux pas sous-estimer l'endroit où se trouvait le scribe e.\\
+    \hline
+  \end{tabular}
   \caption{Homoglyfihyökkäys \citep{boucher2021bad}}
-\end{figure}
-\\Näkymättömien merkkien lailla homoglyfihyökkäyksen toteutus riippuu ympäristön fontista. \citep{boucher2021bad}
+\end{table}
 
 \section{Uudelleenjärjestelyt}
-Uudelleenjärjestelyhyökkäys pohjautuu näennäisen tekstin uudelleenjärjestämiseen pahantahtoisesti. Pankkitilinumeron \texttt{1234567} pystyy esimerkiksi vaihtamaan kaksisuuntaisella-algoritmilla tilinumeroksi \texttt{7654321} pankin palvelinpuolella maksajan huomaamatta mitään. Unicode-merkintä tälle suunnanvaihdolle on \texttt{U+200F}. Uudelleenjärjestelyjä käytetään myös NLP-luokittimen sekoittamiseen, jolloin tulokset NLP-luokittimesta ovat käyttökelvottomia. Kuvassa 3.3 uudelleenjärjestelyhyökkäys merkeissä \texttt{la} aiheuttaa ranskankielisen käännöksen järjettömyyden. Tämänlaista hyökkäystä voisi käyttää digitaalista sanakirjaa tai kääntäjää vastaan. \citep{boucher2021bad}
-\begin{figure}[t]
-  \includegraphics[scale=0.599]{figures/reordering.png}
-  \caption{Homoglyfihyökkäys \citep{boucher2021bad}}
-\end{figure}
-\texttt{U+200F} ladotaan näkymättömänä näkymättömien merkkien tapaan.
+Uudelleenjärjestelyhyökkäys pohjautuu näennäisen tekstin uudelleenjärjestämiseen pahantahtoisesti. Pankkitilinumeron \texttt{1234567} pystyy esimerkiksi vaihtamaan kaksisuuntaisella-algoritmilla tilinumeroksi \texttt{7654321} pankin palvelinpuolella maksajan huomaamatta mitään. Unicode-merkintä tälle suunnanvaihdolle on \texttt{U+200F}. Uudelleenjärjestelyjä käytetään myös NLP-luokittimen sekoittamiseen, jolloin tulokset NLP-luokittimesta ovat käyttökelvottomia. Taulukossa 3.4 uudelleenjärjestelyhyökkäys merkeissä \texttt{la} aiheuttaa ranskankielisen käännöksen järjettömyyden. Tämänlaista hyökkäystä voisi käyttää digitaalista sanakirjaa tai kääntäjää vastaan. \citep{boucher2021bad} \texttt{U+200F} ladotaan näkymättömänä näkymättömien merkkien tapaan.
+
+\begin{table}[hbt]
+  \begin{tabular}{| l | m{20em} |}
+    \hline
+    Alkuperäinen viesti & Käännös\\
+    \hline
+    A black box in your car? & Une boîte noire dans votre voiture ?\\
+    \hline
+    A b\underline{la}ck box in your car? & A b c h a c h a c h a c h a c h a c h a c h a c h e ?\\
+    \hline
+  \end{tabular}
+  \caption{Uudelleenjärjestelyhyökkäys \citep{boucher2021bad}}
+\end{table}
 
 \section{Poistatukset}
 
 Viimeisenä käydään läpi poistatushyökkäykset. Poistatushyökkäyksen tarkoituksena on poistaa käyttäjälle näkyvästä tekstistä ladontavaiheessa haluttu määrä tekstiä pois. Uhri esimerkiksi voisi olla myymässä pois asuntoaan, jolloin tämä kopioi ja liittää sähköiseen sopimukseen hyökkääjän ehdottaman summan. Latomisvaiheessa käyttäjä kuitenkin unohtaa tarkistaa sopimuksen, jolloin poistatusmerkit saattavat poistaa myyntihinnasta esimerkiksi muutaman nollan.
 
 Poistatushyökkäyksiä on vaikeampi toteuttaa aikaisempiin metodeihin verrattuna. Tämä johtuu useimpien käyttöjärjestelmien estosta kopioida poistatusta sisältävää tekstiä leikepöydälle suoraviivaisilla tavoilla, joilla uhri sen tekisi. Onnistuakseen poistatushyökkäyksessä, hyökkääjän tarvitsee yleisesti injektoida NLP-luokittimeen poistatus itse. Esimerkkejä poistatusmerkeistä ovat askelpalautin (BS, eng. backspace), delete (DEL) sekä vaununpalautus (CR, eng. carriage return). \citep{boucher2021bad}
-Kuva 3.4 havainnollistaa poistatushyökkäystä käytännössä. Esimerkissä poistatusmerkkejä on pistetty sanojen väliin, muuttaen näin ladottujen lauseiden merkityksen.
-\begin{figure}[t]
-  \includegraphics[scale=0.599]{figures/backspace.png}
+Kuva 3.4 havainnollistaa poistatushyökkäystä käytännössä. Esimerkissä  näkymättömiä poistatusmerkkejä on pistetty sanojen väliin, muuttaen näin ladottujen lauseiden merkityksen. Viimeinen viesti pitäisi kääntyä viestiksi ''Tämä on tosiaan pakollinen valtiollemme.''. Käännös on kuitenkin hyökkäyksen jälkeen ''Tämä todellisuus on pakollinen rakkauden syntymälle''.
+
+\begin{table}[hbt]
+  \begin{tabular}{| l | m{17em} |}
+    \hline
+    Alkuperäinen viesti & Käännös\\
+    \hline
+    This really is a must for our nation. & C'est vraiment une nécessité pour notre nation.\\
+    \hline
+    This rea\_lly\_\_ is a must for\_ our na\_tion. & Cette réalyya est un incontournable pour la naissance de l'amour.\\
+    \hline
+  \end{tabular}
   \caption{Poistatushyökkäys \citep{boucher2021bad}}
-\end{figure}
+\end{table}
+
+Vaikka NLP-luokittimia vastaan kohdistuvia hyökkäyksiä on monta ja osa hyökkäyksistä on vaikeasti havaittavia, näiltä pyritään silti suojautumaan eri menetelmillä.
